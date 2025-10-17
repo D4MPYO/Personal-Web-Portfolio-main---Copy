@@ -1379,15 +1379,16 @@ body.light-theme .theme-toggle .bx-sun {
    ================================ */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
-    justify-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 @media (max-width: 1200px) {
     .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
     }
 }
 
@@ -1407,185 +1408,240 @@ body.light-theme .theme-toggle .bx-sun {
 .project-card {
     position: relative;
     width: 100%;
-    max-width: 550px;
-    height: 25rem;
-    border-radius: var(--radius-xl);
+    height: 28rem;
+    border-radius: 2rem;
     overflow: hidden;
-    padding: 2rem;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: var(--transition-default);
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
     cursor: pointer;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(139, 49, 255, 0.2);
 }
 
 @media (max-width: 768px) {
     .project-card {
         height: 22rem;
-        padding: 1.5rem;
-        max-width: 100%;
+    }
+
+    .project-content {
+        padding: 2rem;
+    }
+
+    .project-name {
+        font-size: 2.5rem;
+    }
+
+    .project-card:hover .project-name,
+    .project-card.active .project-name {
+        font-size: 2rem;
+    }
+
+    .project-tech-icons {
+        bottom: 2rem;
+        gap: 1rem;
+    }
+
+    .project-tech-icons img {
+        width: 55px;
+        height: 55px;
     }
 }
 
 @media (max-width: 480px) {
     .project-card {
         height: 20rem;
-        padding: 1.25rem;
+    }
+
+    .project-content {
+        padding: 1.5rem;
+    }
+
+    .project-name {
+        font-size: 2rem;
+    }
+
+    .project-card:hover .project-name,
+    .project-card.active .project-name {
+        font-size: 1.8rem;
+    }
+
+    .project-tech-icons {
+        bottom: 1.5rem;
+        gap: 0.8rem;
+    }
+
+    .project-tech-icons img {
+        width: 50px;
+        height: 50px;
+        padding: 0.6rem;
     }
 }
 
-.project-bg {
+/* Project background - not needed, removed for clean design */
+
+.project-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.15;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
     z-index: 0;
-    background-image:
-        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(0, 0, 0, 0.1) 0%, transparent 30%);
-}
-
-.project-bg::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 60px,
-        rgba(255, 255, 255, 0.03) 60px,
-        rgba(255, 255, 255, 0.03) 120px
-    );
-    transform: rotate(-15deg);
-}
-
-.project-bg::after {
-    content: '';
-    position: absolute;
-    bottom: -20%;
-    right: -20%;
-    width: 60%;
-    height: 60%;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(255, 255, 255, 0.08) 0%,
-        transparent 70%
-    );
-    border-radius: 50%;
-}
-
-.project-image {
-    position: absolute;
-    top: 0;
-    right: 2rem;
-    width: 17rem;
-    height: auto;
-    transform: rotate(-22.5deg);
-    border-radius: var(--radius-md);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    opacity: 1;
-    transition: var(--transition-slow);
-    z-index: 0;
-    object-fit: contain;
 }
 
 .project-card:hover .project-image {
-    opacity: 0.1;
-    transform: translateY(-50%) rotate(-22.5deg) scale(1.1);
+    opacity: 0.08;
 }
 
 .project-content {
     position: relative;
     z-index: 10;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Project name visible by default - CENTERED */
+.project-name {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--color-white);
+    text-shadow: 2px 4px 20px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+/* Description and links hidden by default */
+.project-description,
+.project-tech,
+.project-links {
     opacity: 0;
-    transform: translateY(20px);
-    transition: var(--transition-slow);
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
+/* Show description on hover */
 .project-card:hover .project-content {
-    opacity: 1;
-    transform: translateY(0);
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
+.project-card:hover .project-name {
+    font-size: 2.5rem;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.project-card:hover .project-description,
+.project-card:hover .project-tech,
+.project-card:hover .project-links {
+    opacity: 1;
+    visibility: visible;
+    max-height: 500px;
+}
+
+/* Mobile tap - show description */
 .project-card.active .project-content {
-    opacity: 1;
-    transform: translateY(0);
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
-/* Gradient overlays for better text readability */
+.project-card.active .project-name {
+    font-size: 2.5rem;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.project-card.active .project-description,
+.project-card.active .project-tech,
+.project-card.active .project-links {
+    opacity: 1;
+    visibility: visible;
+    max-height: 500px;
+}
+
+.project-card.active .project-tech-icons {
+    opacity: 0.15;
+}
+
+.project-card.active .project-image {
+    opacity: 0.08;
+}
+
+/* Dark overlay for readability */
 .project-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 5rem;
-    background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%);
     z-index: 1;
     pointer-events: none;
-}
-
-.project-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 8rem;
-    background: linear-gradient(0deg, rgba(0,0,0,0.5) 10%, rgba(0,0,0,0) 100%);
-    z-index: 1;
-    pointer-events: none;
-}
-
-.project-name {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-white);
-    margin-bottom: 1rem;
 }
 
 .project-description {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
     margin-bottom: 1.5rem;
-    line-height: 1.6;
+    line-height: 1.7;
+    text-align: left;
 }
 
-/* Tech Icons - Visible by default, scattered positioning */
+/* Tech Icons - BOTTOM CENTER, Always visible */
 .project-tech-icons {
     position: absolute;
     width: 100%;
-    height: 100%;
-    top: 0;
+    bottom: 2.5rem;
     left: 0;
-    z-index: 2;
-    pointer-events: none;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+    transition: all 0.3s ease;
 }
 
 .project-tech-icons img {
-    position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 65px;
+    height: 65px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    transition: var(--transition-default);
-    pointer-events: all;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 }
 
 .project-tech-icons img:hover {
-    transform: scale(1.1);
+    transform: translateY(-8px) scale(1.1);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: var(--color-primary);
+    box-shadow: 0 12px 30px rgba(139, 49, 255, 0.4);
+}
+
+/* Fade out tech icons on hover */
+.project-card:hover .project-tech-icons {
+    opacity: 0.15;
 }
 
 /* Tech Badges - Inside hover content */
@@ -1597,18 +1653,20 @@ body.light-theme .theme-toggle .bx-sun {
 }
 
 .project-tech span {
-    padding: 0.4rem 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1.5rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
+    background: rgba(139, 49, 255, 0.2);
+    border: 1px solid rgba(139, 49, 255, 0.4);
+    border-radius: 2rem;
+    font-size: 0.9rem;
     color: var(--color-white);
     font-weight: 600;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .project-links {
     display: flex;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
 .project-links a {
@@ -1617,18 +1675,20 @@ body.light-theme .theme-toggle .bx-sun {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     color: var(--color-white);
     font-size: 1.5rem;
-    transition: var(--transition-default);
+    transition: all 0.3s ease;
 }
 
 .project-links a:hover {
-    background: var(--color-white);
-    color: var(--color-black);
-    transform: translateY(-5px);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(139, 49, 255, 0.5);
 }
 
 /* ===================================
@@ -2541,3 +2601,4 @@ body.light-theme .theme-toggle .bx-sun {
         height: 200px;
     }
 }
+/* Cache Buster */
