@@ -413,7 +413,7 @@ class ScrollAnimations {
                 delay: index * 0.1
             });
 
-            // Hover animation using GSAP
+            // Hover animation using GSAP (desktop)
             card.addEventListener('mouseenter', () => {
                 gsap.to(card, {
                     scale: 1.02,
@@ -430,6 +430,28 @@ class ScrollAnimations {
                     duration: 0.4,
                     ease: 'power2.out'
                 });
+            });
+
+            // Mobile tap functionality - show description for 5 seconds
+            let tapTimeout = null;
+            card.addEventListener('click', (e) => {
+                // Only trigger on mobile (screen width < 968px)
+                if (window.innerWidth >= 968) return;
+
+                e.preventDefault();
+
+                // Clear previous timeout if exists
+                if (tapTimeout) {
+                    clearTimeout(tapTimeout);
+                }
+
+                // Add active class to show description
+                card.classList.add('active');
+
+                // Auto-hide after 5 seconds
+                tapTimeout = setTimeout(() => {
+                    card.classList.remove('active');
+                }, 5000);
             });
         });
     }
