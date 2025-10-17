@@ -134,6 +134,26 @@ body {
 
 
 /* ===================================
+   Particle Background
+   ================================ */
+#particle-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+#particle-background canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* ===================================
    Progress Bar
    ================================ */
 .progress-bar {
@@ -1671,95 +1691,202 @@ body.light-theme .theme-toggle .bx-sun {
 }
 
 /* ===================================
-   Timeline (Student Experience)
+   Timeline (Student Experience) - ALTERNATING LAYOUT
    ================================ */
 .experience {
     padding: 4rem 0 3rem !important;
 }
 
 .timeline {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    padding-left: 2rem;
+    padding: 2rem 0;
 }
 
+/* Center vertical line */
 .timeline::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--color-primary), rgba(139, 49, 255, 0.3));
+    width: 3px;
+    background: var(--color-gradient);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(139, 49, 255, 0.4);
 }
 
 .timeline-item {
     position: relative;
     margin-bottom: 3rem;
-    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Left side items (odd) */
+.timeline-item:nth-child(odd) {
+    justify-content: flex-start;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right: auto;
+    margin-left: 0;
+    width: calc(50% - 1.5rem);
+}
+
+/* Right side items (even) */
+.timeline-item:nth-child(even) {
+    justify-content: flex-end;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: auto;
+    margin-right: 0;
+    width: calc(50% - 1.5rem);
+}
+
+/* Center marker */
 .timeline-marker {
     position: absolute;
-    left: -2rem;
-    top: 0;
-    width: 16px;
-    height: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background-color: var(--accent-color, var(--color-primary));
-    border: 3px solid var(--bg-primary);
-    z-index: 2;
-    box-shadow: 0 0 0 4px rgba(139, 49, 255, 0.2);
-}
-
-.timeline-content {
-    background: var(--bg-secondary);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    border-left: 4px solid var(--accent-color, var(--color-primary));
+    background: var(--accent-color, var(--color-primary));
+    border: 4px solid var(--bg-primary);
+    z-index: 3;
+    box-shadow: 0 0 0 6px rgba(139, 49, 255, 0.15),
+                0 4px 12px rgba(139, 49, 255, 0.3);
     transition: var(--transition-default);
 }
 
+.timeline-item:hover .timeline-marker {
+    transform: translateX(-50%) scale(1.3);
+    box-shadow: 0 0 0 8px rgba(139, 49, 255, 0.2),
+                0 6px 20px rgba(139, 49, 255, 0.5);
+}
+
+.timeline-content {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(139, 49, 255, 0.05) 100%);
+    padding: 2rem 2.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(139, 49, 255, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-default);
+    min-height: auto;
+}
+
+/* Left accent bar for odd items */
+.timeline-item:nth-child(odd) .timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--accent-color, var(--color-gradient));
+    border-radius: 0 10px 10px 0;
+}
+
+/* Right accent bar for even items */
+.timeline-item:nth-child(even) .timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--accent-color, var(--color-gradient));
+    border-radius: 10px 0 0 10px;
+}
+
 .timeline-content:hover {
-    transform: translateX(10px);
-    box-shadow: 0 10px 30px rgba(139, 49, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(139, 49, 255, 0.3);
+    border-color: var(--color-primary);
 }
 
 .timeline-badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: var(--accent-color, var(--color-primary));
+    background: var(--accent-color, var(--color-gradient));
     color: var(--color-white);
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    border-radius: var(--radius-xl);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 4px 12px rgba(139, 49, 255, 0.3);
 }
 
 .timeline-title {
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
 }
 
 .timeline-description {
     color: var(--text-secondary);
-    line-height: 1.8;
+    line-height: 1.7;
     font-size: 1rem;
 }
 
-@media (max-width: 768px) {
-    .timeline {
-        padding-left: 1.5rem;
+/* Mobile - Stack vertically */
+@media (max-width: 968px) {
+    .timeline::before {
+        left: 2rem;
+        transform: none;
     }
 
     .timeline-item {
-        padding-left: 1.5rem;
+        justify-content: flex-start !important;
+        padding-left: 3rem;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        width: 100%;
+        margin: 0;
     }
 
     .timeline-marker {
-        left: -1.5rem;
+        left: 2rem;
+        transform: translateX(-50%);
+    }
+
+    .timeline-item:hover .timeline-marker {
+        transform: translateX(-50%) scale(1.3);
+    }
+
+    /* All items have left accent bar on mobile */
+    .timeline-item:nth-child(odd) .timeline-content::before {
+        right: auto;
+        left: 0;
+        border-radius: 10px 0 0 10px;
+    }
+
+    .timeline-content {
+        padding: 2rem;
+    }
+
+    .timeline-title {
+        font-size: 1.2rem;
+    }
+
+    .timeline-description {
+        font-size: 0.95rem;
     }
 }

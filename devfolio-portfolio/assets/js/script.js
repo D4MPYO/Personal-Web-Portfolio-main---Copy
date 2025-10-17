@@ -960,10 +960,143 @@ class SkillsWheel {
 }
 
 // ===================================
+// Particle Background with Three.js
+// ===================================
+class ParticleBackground {
+    constructor() {
+        this.container = document.getElementById('particle-background');
+        this.scene = null;
+        this.camera = null;
+        this.renderer = null;
+        this.particles = null;
+        this.mouse = { x: 0, y: 0 };
+        this.targetMouse = { x: 0, y: 0 };
+
+        this.init();
+    }
+
+    init() {
+        if (!this.container || typeof THREE === 'undefined') {
+            console.error('❌ Three.js or container not found!');
+            return;
+        }
+
+        console.log('🌌 Initializing particle background...');
+
+        // Set up scene
+        this.scene = new THREE.Scene();
+
+        // Set up camera
+        this.camera = new THREE.PerspectiveCamera(
+            20,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+        this.camera.position.z = 5;
+
+        // Set up renderer
+        this.renderer = new THREE.WebGLRenderer({ alpha: true });
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setClearAlpha(0);
+        this.container.appendChild(this.renderer.domElement);
+
+        // Create particles
+        this.createParticles();
+
+        // Mouse movement
+        window.addEventListener('mousemove', (event) => {
+            this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Handle resize
+        window.addEventListener('resize', () => this.handleResize());
+
+        // Start animation
+        this.animate();
+
+        console.log('✅ Particle background initialized');
+    }
+
+    createParticles() {
+        const numParticles = 500;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(numParticles * 3);
+        const colors = new Float32Array(numParticles * 3);
+
+        for (let i = 0; i < numParticles; i++) {
+            // Random positions
+            positions[i * 3] = (Math.random() - 0.5) * 10;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+
+            // Alternate between white and blue particles
+            if (i % 2 === 0) {
+                // White particles
+                colors[i * 3] = 1.0;     // R
+                colors[i * 3 + 1] = 1.0; // G
+                colors[i * 3 + 2] = 1.0; // B
+            } else {
+                // Blue particles (#4276C3)
+                colors[i * 3] = 66 / 255;   // R
+                colors[i * 3 + 1] = 118 / 255; // G
+                colors[i * 3 + 2] = 195 / 255; // B
+            }
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.02,
+            vertexColors: true
+        });
+
+        this.particles = new THREE.Points(geometry, material);
+        this.scene.add(this.particles);
+    }
+
+    animate() {
+        requestAnimationFrame(() => this.animate());
+
+        // Wave motion
+        const time = Date.now() * 0.0001;
+        const positions = this.particles.geometry.attributes.position.array;
+
+        for (let i = 0; i < positions.length; i += 3) {
+            positions[i + 1] = Math.sin(i / 100 + time);
+        }
+
+        this.particles.geometry.attributes.position.needsUpdate = true;
+
+        // Smooth mouse interaction
+        this.targetMouse.x += (this.mouse.x * 0.2 - this.targetMouse.x) * 0.02;
+        this.targetMouse.y += (-this.mouse.y * 0.2 - this.targetMouse.y) * 0.02;
+
+        // Rotate particles towards mouse
+        gsap.to(this.particles.rotation, {
+            x: this.targetMouse.x,
+            y: this.targetMouse.y,
+            duration: 1,
+        });
+
+        this.renderer.render(this.scene, this.camera);
+    }
+
+    handleResize() {
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+}
+
+// ===================================
 // Initialize Everything
 // ===================================
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all components
+    new ParticleBackground();
     new ProgressBar();
     new Menu();
     new ThemeToggle();
