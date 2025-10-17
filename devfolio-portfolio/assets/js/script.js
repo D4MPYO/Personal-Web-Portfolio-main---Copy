@@ -587,10 +587,10 @@ class SkillsWheel {
         this.descriptionBox = document.getElementById('skillDescription');
         this.dragIndicator = document.querySelector('.drag-me-indicator');
         this.collisionPoint = document.getElementById('collisionPoint');
+        this.sphere = document.querySelector('.sphere');
 
         this.currentRotation = 0;
         this.isDragging = false;
-        this.hasInteracted = false;
         this.activeIndex = null;
         this.velocity = 0;
         this.lastAngle = 0;
@@ -601,7 +601,7 @@ class SkillsWheel {
         this.autoSpinSpeed = 0.15; // Slow rotation speed (degrees per frame)
         this.autoSpinAnimation = null;
         this.inactivityTimer = null;
-        this.inactivityDelay = 10000; // 10 seconds
+        this.inactivityDelay = 7000; // 7 seconds
 
         this.init();
     }
@@ -677,16 +677,9 @@ class SkillsWheel {
             this.stopAutoSpin();
             this.clearInactivityTimer();
 
-            // Show description on drag start
-            if (!this.hasInteracted) {
-                this.hasInteracted = true;
-                if (this.dragIndicator) {
-                    gsap.to(this.dragIndicator, {
-                        opacity: 0,
-                        duration: 0.5,
-                        onComplete: () => this.dragIndicator.classList.add('hidden')
-                    });
-                }
+            // Scale down sphere when dragging
+            if (this.sphere) {
+                this.sphere.classList.add('is-active');
             }
 
             console.log('🖱️ Drag started');
@@ -728,6 +721,11 @@ class SkillsWheel {
             if (!this.isDragging) return;
 
             this.isDragging = false;
+
+            // Scale up sphere when drag ends
+            if (this.sphere) {
+                this.sphere.classList.remove('is-active');
+            }
 
             console.log('🖱️ Drag ended - velocity:', this.velocity.toFixed(3));
 

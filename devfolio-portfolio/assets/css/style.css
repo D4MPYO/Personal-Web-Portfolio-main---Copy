@@ -830,6 +830,7 @@ body.light-theme .theme-toggle .bx-sun {
    ================================ */
 .skills {
     padding: 4rem 0 !important;
+    padding-bottom: 12rem !important;
     overflow: visible;
 }
 
@@ -840,23 +841,81 @@ body.light-theme .theme-toggle .bx-sun {
     margin: 0 auto;
 }
 
+/* Glowing Sphere */
+.sphere-wrapper {
+    --size: 16vw;
+    position: absolute;
+    bottom: calc(-1 * var(--size) / 2);
+    left: calc(50% - var(--size) / 2);
+    z-index: 1;
+}
+
+.sphere {
+    transition: all 0.3s ease-in-out;
+    transform-origin: 50% 50%;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 100%;
+    background: linear-gradient(113deg, #DECAFF 11.44%, #691EE2 60.27%);
+    box-shadow: -35.036px -50.051px 80.1px 0px rgba(172, 60, 225, 0.76) inset,
+                0px 20.02px 40px 0px rgba(194, 255, 255, 0.25) inset,
+                0px 0px 24px 0px rgba(255, 255, 255, 0.26) inset;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.sphere::before,
+.sphere::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.sphere::before {
+    width: 120%;
+    height: 120%;
+    border-radius: 100%;
+    filter: blur(8rem);
+    background: linear-gradient(180deg, rgba(0, 194, 255, 0.00) 0%, #9829ff 100%);
+    transform: translate(-50%, -80%);
+}
+
+.sphere::after {
+    width: 66%;
+    height: 100%;
+    filter: blur(8rem);
+    background: linear-gradient(180deg, rgba(24, 75, 255, 0.00) 0%, #174AFF 100%);
+    transform: translate(-50%, -50%);
+}
+
+.sphere.is-active {
+    transform: scale(0.8);
+}
+
+@media (max-width: 768px) {
+    .sphere-wrapper {
+        --size: 25vw;
+    }
+}
+
 /* Drag Me Indicator */
 .drag-me-indicator {
     position: absolute;
-    top: 15%;
-    right: 15%;
-    font-size: 2.5rem;
-    font-style: italic;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.9);
+    top: 0;
+    right: 0;
+    width: 18vw;
     pointer-events: none;
+    user-select: none;
     opacity: 1;
     transition: opacity 0.5s ease;
     z-index: 20;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    white-space: nowrap;
+}
+
+.drag-me-indicator svg {
+    width: 100%;
+    height: auto;
 }
 
 .drag-me-indicator.hidden {
@@ -866,9 +925,9 @@ body.light-theme .theme-toggle .bx-sun {
 
 @media (max-width: 768px) {
     .drag-me-indicator {
-        font-size: 1.3rem;
-        right: 10%;
-        top: 10%;
+        width: 30vw;
+        top: 0;
+        right: 0;
     }
 }
 
