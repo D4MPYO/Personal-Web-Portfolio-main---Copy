@@ -596,22 +596,38 @@ class SkillsWheel {
         this.lastAngle = 0;
         this.lastTime = Date.now();
 
+        // Auto-spin properties
+        this.isAutoSpinning = false;
+        this.autoSpinSpeed = 0.15; // Slow rotation speed (degrees per frame)
+        this.autoSpinAnimation = null;
+        this.inactivityTimer = null;
+        this.inactivityDelay = 10000; // 10 seconds
+
         this.init();
     }
 
     init() {
-        if (!this.wheel || this.cards.length === 0) return;
+        if (!this.wheel || this.cards.length === 0) {
+            console.error('❌ Skills wheel elements not found!');
+            return;
+        }
 
         console.log('🎡 Semi-circular wheel initialized with', this.cards.length, 'skills');
 
         // Position cards in a circle
         this.positionCards();
 
-        // Set initial active card
-        this.setActiveCard(0);
+        // Hide description initially during auto-spin
+        this.hideDescription();
 
         // Setup drag functionality
         this.setupDrag();
+
+        // Start auto-spin after a short delay
+        setTimeout(() => {
+            console.log('🚀 Starting auto-spin...');
+            this.startAutoSpin();
+        }, 500);
     }
 
     positionCards() {
@@ -657,6 +673,10 @@ class SkillsWheel {
             this.lastTime = Date.now();
             this.velocity = 0;
 
+            // Stop auto-spin on interaction
+            this.stopAutoSpin();
+            this.clearInactivityTimer();
+
             // Show description on drag start
             if (!this.hasInteracted) {
                 this.hasInteracted = true;
@@ -668,9 +688,6 @@ class SkillsWheel {
                     });
                 }
             }
-
-            // Set active to null during drag
-            this.setActiveCard(null);
 
             console.log('🖱️ Drag started');
         };
@@ -721,6 +738,9 @@ class SkillsWheel {
                 // Snap to nearest card immediately
                 this.snapToNearest();
             }
+
+            // Start inactivity timer to resume auto-spin
+            this.startInactivityTimer();
         };
 
         this.wheel.addEventListener('mousedown', onMouseDown);
@@ -879,6 +899,65 @@ class SkillsWheel {
                 this.descriptionBox.classList.remove('visible');
             }
         });
+    }
+
+    startAutoSpin() {
+        if (this.isAutoSpinning) return; // Already spinning
+
+        this.isAutoSpinning = true;
+
+        // Remove active card and hide description during auto-spin
+        this.cards.forEach(card => card.classList.remove('focused'));
+        this.hideDescription();
+
+        const spinStep = () => {
+            if (!this.isAutoSpinning) return;
+
+            // Slowly rotate the wheel
+            this.currentRotation += this.autoSpinSpeed;
+
+            gsap.set(this.wheel, {
+                rotation: this.currentRotation
+            });
+
+            // Update card rotations to keep them upright
+            this.updateCardRotations();
+
+            // Continue animation
+            this.autoSpinAnimation = requestAnimationFrame(spinStep);
+        };
+
+        console.log('🔄 Auto-spin started');
+        spinStep();
+    }
+
+    stopAutoSpin() {
+        if (!this.isAutoSpinning) return;
+
+        this.isAutoSpinning = false;
+
+        if (this.autoSpinAnimation) {
+            cancelAnimationFrame(this.autoSpinAnimation);
+            this.autoSpinAnimation = null;
+        }
+
+        console.log('⏸️ Auto-spin stopped');
+    }
+
+    startInactivityTimer() {
+        this.clearInactivityTimer();
+
+        this.inactivityTimer = setTimeout(() => {
+            console.log('⏰ Inactivity detected - resuming auto-spin');
+            this.startAutoSpin();
+        }, this.inactivityDelay);
+    }
+
+    clearInactivityTimer() {
+        if (this.inactivityTimer) {
+            clearTimeout(this.inactivityTimer);
+            this.inactivityTimer = null;
+        }
     }
 }
 

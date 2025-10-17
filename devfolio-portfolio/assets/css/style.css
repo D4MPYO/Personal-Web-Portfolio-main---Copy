@@ -843,22 +843,33 @@ body.light-theme .theme-toggle .bx-sun {
 /* Drag Me Indicator */
 .drag-me-indicator {
     position: absolute;
-    top: 50%;
-    right: 10%;
-    transform: translateY(-50%);
-    font-size: 1.8rem;
+    top: 15%;
+    right: 15%;
+    font-size: 2.5rem;
     font-style: italic;
     font-weight: 300;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     pointer-events: none;
     opacity: 1;
     transition: opacity 0.5s ease;
     z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
 }
 
 .drag-me-indicator.hidden {
     opacity: 0;
     pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .drag-me-indicator {
+        font-size: 1.3rem;
+        right: 10%;
+        top: 10%;
+    }
 }
 
 /* Semi-Circular Wheel Container - FULL WIDTH */
