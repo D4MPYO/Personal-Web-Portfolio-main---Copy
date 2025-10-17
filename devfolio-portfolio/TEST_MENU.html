@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1002;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #8b31ff;
+        }
+
+        .menu-checkbox {
+            position: absolute;
+            opacity: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            z-index: 1001;
+            cursor: pointer;
+            right: 2rem;
+            top: 2rem;
+        }
+
+        .hamburger {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 0.125rem;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .hamburger-line::before,
+        .hamburger-line::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0.125rem;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-line::before {
+            top: -0.5rem;
+        }
+
+        .hamburger-line::after {
+            top: 0.5rem;
+        }
+
+        .menu-checkbox:checked + .hamburger .hamburger-line {
+            transform: rotate(135deg);
+        }
+
+        .menu-checkbox:checked + .hamburger .hamburger-line::before {
+            top: 0;
+            transform: rotate(90deg);
+        }
+
+        .menu-checkbox:checked + .hamburger .hamburger-line::after {
+            top: 0;
+            opacity: 0;
+        }
+
+        .fullscreen-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 999;
+        }
+
+        .menu-checkbox:checked ~ .fullscreen-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-content {
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-list li {
+            margin: 2rem 0;
+        }
+
+        .menu-link {
+            font-size: 4rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #ffffff;
+            display: block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .menu-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 4px;
+            bottom: -10px;
+            left: 50%;
+            background: linear-gradient(90deg, #9f55ff 0%, #7000ff 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .menu-link:hover {
+            color: #8b31ff;
+            transform: scale(1.1);
+        }
+
+        .menu-link:hover::before {
+            width: 100%;
+        }
+
+        .test-content {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .test-content h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #9f55ff 0%, #7000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .test-content p {
+            font-size: 1.5rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <span>Jo</span>Nard<span>.</span>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+            <label for="menu-toggle" class="hamburger">
+                <div class="hamburger-line"></div>
+            </label>
+
+            <nav class="fullscreen-menu">
+                <div class="menu-content">
+                    <ul class="menu-list">
+                        <li><a href="#home" class="menu-link">Home</a></li>
+                        <li><a href="#about" class="menu-link">About</a></li>
+                        <li><a href="#achievements" class="menu-link">Achievements</a></li>
+                        <li><a href="#experience" class="menu-link">Experience</a></li>
+                        <li><a href="#skills" class="menu-link">Skills</a></li>
+                        <li><a href="#projects" class="menu-link">Projects</a></li>
+                        <li><a href="#contact" class="menu-link">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="test-content">
+        <h1>MENU TEST PAGE</h1>
+        <p>Click the hamburger icon (top right) to test the menu</p>
+        <p>All 7 links should be visible in BRIGHT WHITE text</p>
+    </div>
+
+    <script src="assets/js/gsap.min.js"></script>
+    <script>
+        console.log('GSAP loaded:', typeof gsap !== 'undefined');
+        console.log('GSAP version:', gsap ? gsap.version : 'NOT LOADED');
+
+        // Menu animation
+        const menuCheckbox = document.getElementById('menu-toggle');
+        const menuContent = document.querySelector('.menu-content');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        menuCheckbox.addEventListener('change', () => {
+            if (menuCheckbox.checked) {
+                console.log('Menu opened!');
+
+                // Popup animation
+                gsap.fromTo(menuContent,
+                    {
+                        scale: 0,
+                        opacity: 0,
+                        rotation: -10
+                    },
+                    {
+                        scale: 1,
+                        opacity: 1,
+                        rotation: 0,
+                        duration: 0.5,
+                        ease: 'back.out(1.7)'
+                    }
+                );
+
+                // Stagger menu items
+                gsap.from('.menu-link', {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.4,
+                    stagger: 0.1,
+                    delay: 0.2,
+                    ease: 'power2.out'
+                });
+            }
+        });
+
+        // Close menu on link click
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuCheckbox.checked = false;
+            });
+        });
+    </script>
+</body>
+</html>

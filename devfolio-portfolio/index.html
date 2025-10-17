@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Jonard Gan</title>
+    <meta name="description" content="Jonard Gan is a passionate Frontend Engineer, dedicated to crafting aesthetic and modern apps that captivate and engage users.">
+    <link rel="icon" type="image/png" href="../Image/favCon.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar"></div>
+
+    <!-- Header/Navigation -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#home" class="logo link">
+                <span>Jo</span>Nard<span>.</span>
+            </a>
+
+            <div class="header-right">
+                <!-- Sound Bar (optional - works without music file) -->
+                <div class="soundbar link" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button class="theme-toggle link" aria-label="Toggle Theme">
+                    <i class='bx bx-moon'></i>
+                    <i class='bx bx-sun'></i>
+                </button>
+
+                <!-- Hamburger Menu -->
+                <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+                <label for="menu-toggle" class="hamburger link">
+                    <div class="hamburger-line"></div>
+                </label>
+
+                <!-- Full Screen Menu -->
+                <nav class="fullscreen-menu">
+                    <div class="menu-content">
+                        <ul class="menu-list">
+                            <li><a href="#home" class="menu-link">Home</a></li>
+                            <li><a href="#about" class="menu-link">About</a></li>
+                            <li><a href="#achievements" class="menu-link">Achievements</a></li>
+                            <li><a href="#experience" class="menu-link">Experience</a></li>
+                            <li><a href="#skills" class="menu-link">Skills</a></li>
+                            <li><a href="#projects" class="menu-link">Projects</a></li>
+                            <li><a href="#contact" class="menu-link">Contact</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="section-container">
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="https://github.com/D4MPYO" class="link" target="_blank" aria-label="GitHub">
+                    <i class='bx bxl-github'></i>
+                </a>
+                <a href="https://www.linkedin.com/in/jonardgan" class="link" target="_blank" aria-label="LinkedIn">
+                    <i class='bx bxl-linkedin'></i>
+                </a>
+                <a href="mailto:jonardgan01@gmail.com" class="link" aria-label="Email">
+                    <i class='bx bxl-gmail'></i>
+                </a>
+                <a href="https://web.facebook.com/nardyyy15" class="link" target="_blank" aria-label="Facebook">
+                    <i class='bx bxl-facebook'></i>
+                </a>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="text-gradient">Jonard Gan</span>
+                    </h1>
+                    <h2 class="hero-subtitle">
+                        <span class="typed-text"></span>
+                        <span class="cursor-blink">|</span>
+                    </h2>
+                    <p class="hero-description">
+                        I'm a software developer passionate about creating aesthetic and modern applications
+                        that captivate and engage users. Welcome to my portfolio website where you'll learn
+                        about my journey as a developer and programmer.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary link">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary link">Let's Talk</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="../Image/BusinessAttire.png" alt="Jonard Gan">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about section" id="about">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Get to know me better</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="../Image/Picture ko.png" alt="Jonard Gan">
+                </div>
+                <div class="about-text">
+                    <h3 class="about-intro-title">Introduction</h3>
+                    <p>
+                        I am an Information Systems student who is passionate about technology and always
+                        eager to learn more. I enjoy solving problems and finding creative solutions in
+                        the tech world. My goal is to continue growing my skills and apply what I've learned
+                        to real-world projects. I'm especially interested in developing software and exploring
+                        how technology can be used to improve everyday life.
+                    </p>
+                    <p>
+                        Outside of my studies, I love biking, camping, and photography. These activities
+                        help me relax and recharge. Spending time in nature gives me a break from the digital
+                        world and helps me stay inspired and creative. I believe that having a balance between
+                        technology and nature helps me think more clearly and stay focused on my goals.
+                    </p>
+                    <p>
+                        I'm always looking for new challenges to test my skills, and I enjoy collaborating
+                        with others to solve complex problems. Whether it's working on a project, learning
+                        a new tool, or exploring new technologies, I'm excited to continue growing both
+                        professionally and personally.
+                    </p>
+                    <p>
+                        Through my journey, I aim to contribute to projects that make a positive impact and
+                        help drive innovation in the tech industry. I am dedicated to improving and developing
+                        my abilities to make meaningful contributions in the future.
+                    </p>
+
+                    <div class="about-info">
+                        <div class="info-item">
+                            <i class='bx bxs-user'></i>
+                            <span>Jonard Gan</span>
+                        </div>
+                        <div class="info-item">
+                            <i class='bx bxs-phone'></i>
+                            <span>+63 961 787 4944</span>
+                        </div>
+                        <div class="info-item">
+                            <i class='bx bxl-gmail'></i>
+                            <span>jonardgan01@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Achievements Section -->
+    <section class="achievements section" id="achievements">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">My Academic Achievements</h2>
+                <p class="section-subtitle">Educational journey and accomplishments</p>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-button">
+                        <span class="accordion-title">CURRENT COLLEGE EDUCATION</span>
+                        <i class='bx bx-plus accordion-icon'></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            I am currently in my 3rd year of pursuing a <strong>Bachelor of Science in Information Systems</strong> at <strong>Camarines Norte State College</strong>.
+                            My coursework includes subjects like programming, database management, and IT fundamentals, providing a strong foundation for my career in the tech field.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-button">
+                        <span class="accordion-title">SENIOR HIGH SCHOOL EDUCATION</span>
+                        <i class='bx bx-plus accordion-icon'></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            I went to <strong>Vinzons Pilot High School</strong> when I was in Senior High School.
+                            My strand was the <strong>General Academic Strand</strong>, and I graduated with High Honors.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-button">
+                        <span class="accordion-title">PERSONAL PROJECTS</span>
+                        <i class='bx bx-plus accordion-icon'></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            I have worked on several personal projects, including application development, creating dynamic and static websites,
+                            and building simple database applications. These projects have given me the opportunity to apply my knowledge in real-world
+                            scenarios and enhance my skills in mobile development, web development and database management.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-button">
+                        <span class="accordion-title">ACADEMIC GOALS & ASPIRATIONS</span>
+                        <i class='bx bx-plus accordion-icon'></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            As I continue with my BS Information Systems program, I aim to specialize in data analysis and software development.
+                            I am excited about the opportunities to expand my knowledge and eventually pursue a successful career in the tech industry.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Experience Section -->
+    <section class="experience section" id="experience">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Student Experience</h2>
+                <p class="section-subtitle">My journey as a developer</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker" style="--accent-color: #4CAF50;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-badge">Android Developer</div>
+                        <h3 class="timeline-title">Mobile App Developer for Student Research</h3>
+                        <p class="timeline-description">
+                            Collaborated with students in developing Android applications for their academic and research requirements.
+                            Responsibilities included implementing user interfaces, quiz functionalities, result tracking, and local data management.
+                            Applications were built using Java and Android Studio, adhering to their project specifications and academic guidelines.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker" style="--accent-color: #41516C;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-badge">Web Developer</div>
+                        <h3 class="timeline-title">Web Developer for Coffee Shop</h3>
+                        <p class="timeline-description">
+                            The instructor assigned us a project to create a client-based website for a coffee shop.
+                            I began by analyzing the client's requirements and designing a sitemap and wireframe to plan the layout and user flow.
+                            After finalizing the design, I developed a responsive and user-friendly website, ensuring it met the client's objectives.
+                            This project enhanced my skills in web development and client-focused design.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker" style="--accent-color: #FBCA3E;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-badge">Programmer</div>
+                        <h3 class="timeline-title">Programming Projects</h3>
+                        <p class="timeline-description">
+                            I coded several programs and successfully completed various activities and logic-based tasks.
+                            I consider myself a fast learner, although I tend to forget things quickly as well.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker" style="--accent-color: #E24A68;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-badge">Web Designer</div>
+                        <h3 class="timeline-title">Web Designer for Liham Cafe</h3>
+                        <p class="timeline-description">
+                            I designed the websites I created for Liham Cafe, focusing on creating visually appealing and functional layouts that align with the brand's identity.
+                            Additionally, I designed my personal portfolio with attention to detail, ensuring it showcases my skills and accomplishments effectively.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker" style="--accent-color: #1B5F8C;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-badge">Photographer</div>
+                        <h3 class="timeline-title">Amateur Photographer</h3>
+                        <p class="timeline-description">
+                            Photography is one of my favorite ways to pass the time. Whether I'm capturing everyday moments or looking for something special,
+                            it lets me appreciate the world around me in a different way. It's a great way to relax, get creative, and create memories that last.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills section" id="skills">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Skills</h2>
+                <p class="section-subtitle">Technologies I work with</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <img src="../Image/SVG/html5.svg" alt="HTML5">
+                    <span>HTML5</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/css3.svg" alt="CSS3">
+                    <span>CSS3</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/JavaScript.svg" alt="JavaScript">
+                    <span>JavaScript</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/java.svg" alt="Java">
+                    <span>Java</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/android.svg" alt="Android Studio">
+                    <span>Android Studio</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/python.svg" alt="Python">
+                    <span>Python</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/vscode.svg" alt="VS Code">
+                    <span>VS Code</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/php.svg" alt="PHP">
+                    <span>PHP</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/mysql-logo-svgrepo-com.svg" alt="MySQL">
+                    <span>MySQL</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/Microsoft-365.svg" alt="Microsoft Office">
+                    <span>Microsoft Office</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/canva.svg" alt="Canva">
+                    <span>Canva</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/capcut.svg" alt="Capcut">
+                    <span>Capcut</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/github.svg" alt="GitHub">
+                    <span>GitHub</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/firebase.svg" alt="Firebase">
+                    <span>Firebase</span>
+                </div>
+                <div class="skill-card">
+                    <img src="../Image/SVG/figma.svg" alt="Figma">
+                    <span>Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects section" id="projects">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-subtitle">Things I've built</p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1: Atomuklas -->
+                <div class="project-card" data-gradient="linear-gradient(90deg, #F14658 0%, #DC2537 100%)">
+                    <div class="project-bg"></div>
+                    <img src="../Image/atomuklas.png" alt="Atomuklas" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">Atomuklas</h3>
+                        <p class="project-description">
+                            A science-focused Android app developed for educational research. Features lessons
+                            on atomic structure, 3D models, and interactive quiz games with real-time feedback.
+                        </p>
+                        <div class="project-tech">
+                            <span>Java</span>
+                            <span>XML</span>
+                            <span>Kotlin</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/D4MPYO" class="link" target="_blank">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                            <a href="https://atomuklas.netlify.app/" class="link" target="_blank">
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: AnaphyMaster -->
+                <div class="project-card" data-gradient="linear-gradient(90deg, #FFA62E 0%, #EA4D2C 100%)">
+                    <div class="project-bg"></div>
+                    <img src="../Image/anaphymasters.png" alt="AnaphyMaster" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">AnaphyMaster</h3>
+                        <p class="project-description">
+                            Mobile application for anatomy and physiology students. Features categorized quizzes,
+                            user-friendly interface, and progress tracking for medical students.
+                        </p>
+                        <div class="project-tech">
+                            <span>Java</span>
+                            <span>XML</span>
+                            <span>Kotlin</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/D4MPYO" class="link" target="_blank">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                            <a href="https://anaphymaster.netlify.app/" class="link" target="_blank">
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: PassCSE -->
+                <div class="project-card" data-gradient="linear-gradient(90deg, #000066 0%, #6699FF 100%)">
+                    <div class="project-bg"></div>
+                    <img src="../Image/sample.png" alt="PassCSE" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">PassCSE</h3>
+                        <p class="project-description">
+                            Mobile reviewer app for Civil Service Exam preparation. Features timed assessments,
+                            randomized questions, and comprehensive score tracking.
+                        </p>
+                        <div class="project-tech">
+                            <span>Java</span>
+                            <span>XML</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/D4MPYO" class="link" target="_blank">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                            <a href="https://passcse.netlify.app/" class="link" target="_blank">
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Liham Cafe -->
+                <div class="project-card" data-gradient="linear-gradient(90deg, #142D46 0%, #2E4964 100%)">
+                    <div class="project-bg"></div>
+                    <img src="../Image/Liham-cafe-v2.png" alt="Liham Cafe" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-name">Liham Cafe</h3>
+                        <p class="project-description">
+                            Coffee shop website with improved UI/UX design, dynamic menu system, and
+                            responsive layout for seamless user experience.
+                        </p>
+                        <div class="project-tech">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/D4MPYO/Liham-Cafe-V.2" class="link" target="_blank">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                            <a href="https://d4mpyo.github.io/Liham-Cafe-V.2/" class="link" target="_blank">
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaboration Section -->
+    <section class="collaboration section">
+        <div class="section-container">
+            <div class="collaboration-content">
+                <p class="collaboration-text-top">
+                    Software Engineering Problem Solving Software Architecture Software Engineering Problem Solving Software Architecture Software Engineering Problem Solving Software Architecture
+                </p>
+
+                <h2 class="collaboration-title">
+                    Interested in <span class="text-gradient-animated">Collaboration</span>?
+                </h2>
+
+                <p class="collaboration-text-bottom">
+                    Agile Development Frontend Development React Native Development Agile Development Frontend Development React Native Development Agile Development Frontend Development
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section" id="contact">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's work together</p>
+            </div>
+
+            <div class="contact-content">
+                <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="34c68be7-62cd-443b-96cc-7de505cea7fb">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary link">Send Message</button>
+                </form>
+
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class='bx bxl-gmail'></i>
+                        <span>jonardgan01@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class='bx bxs-phone'></i>
+                        <span>+63 961 787 4944</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class='bx bxs-map'></i>
+                        <span>Vinzons, Camarines Norte, Philippines</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-gradient"></div>
+        <div class="footer-content">
+            <div class="section-container">
+                <h2 class="footer-title">Feel free to connect on social media.</h2>
+
+                <div class="footer-social">
+                    <a href="https://github.com/D4MPYO" class="link" target="_blank" aria-label="GitHub">
+                        <i class='bx bxl-github'></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/jonardgan" class="link" target="_blank" aria-label="LinkedIn">
+                        <i class='bx bxl-linkedin'></i>
+                    </a>
+                    <a href="https://web.facebook.com/nardyyy15" class="link" target="_blank" aria-label="Facebook">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+                    <a href="https://www.instagram.com/" class="link" target="_blank" aria-label="Instagram">
+                        <i class='bx bxl-instagram'></i>
+                    </a>
+                </div>
+
+                <a href="#contact" class="btn btn-secondary link footer-btn">Let's Talk</a>
+
+                <p class="footer-credits">
+                    Developed with <span class="heart">❤️</span> by <span class="text-gradient">Jonard Gan</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-curve">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+            </svg>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

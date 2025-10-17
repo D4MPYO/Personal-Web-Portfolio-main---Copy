@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        .accordion-item {
+            background: #1a171e;
+            border-radius: 1rem;
+            border: 1px solid rgba(139, 49, 255, 0.2);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .accordion-button {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: transparent;
+            border: none;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .accordion-button:hover {
+            background: rgba(139, 49, 255, 0.1);
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            color: #8b31ff;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            color: #aaa;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .test-result {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #1a171e;
+            border: 2px solid #8b31ff;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Accordion Test</h1>
+
+    <div class="accordion">
+        <div class="accordion-item">
+            <button class="accordion-button">
+                <span class="accordion-title">Item 1</span>
+                <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content">
+                <p>This is the content of item 1. Click the button again to close.</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button">
+                <span class="accordion-title">Item 2</span>
+                <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content">
+                <p>This is the content of item 2. Other items stay open!</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-button">
+                <span class="accordion-title">Item 3</span>
+                <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content">
+                <p>This is the content of item 3. You can have multiple items open at once.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-result">
+        <h3>Test Status: <span id="status">Initializing...</span></h3>
+        <p>Buttons found: <span id="button-count">0</span></p>
+        <p>Last action: <span id="last-action">None</span></p>
+    </div>
+
+    <script>
+        console.log('Test script started');
+
+        // Wait for DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            const statusEl = document.getElementById('status');
+            const buttonCountEl = document.getElementById('button-count');
+            const lastActionEl = document.getElementById('last-action');
+
+            buttonCountEl.textContent = accordionButtons.length;
+
+            if (accordionButtons.length === 0) {
+                statusEl.textContent = 'FAILED - No buttons found!';
+                statusEl.style.color = 'red';
+                return;
+            }
+
+            statusEl.textContent = 'READY ✅';
+            statusEl.style.color = '#00ff00';
+
+            console.log('Found', accordionButtons.length, 'accordion buttons');
+
+            accordionButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    console.log('Button clicked:', index);
+
+                    const accordionItem = button.parentElement;
+                    console.log('Parent element:', accordionItem);
+                    console.log('Has active class:', accordionItem.classList.contains('active'));
+
+                    // Toggle the clicked item only (allow multiple items open)
+                    accordionItem.classList.toggle('active');
+
+                    lastActionEl.textContent = `Toggled item ${index + 1} - Now ${accordionItem.classList.contains('active') ? 'OPEN' : 'CLOSED'}`;
+
+                    console.log('After toggle:', accordionItem.classList.contains('active'));
+                });
+            });
+
+            console.log('Event listeners attached successfully');
+        });
+    </script>
+</body>
+</html>
