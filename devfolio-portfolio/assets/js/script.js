@@ -1108,6 +1108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new ContactForm();
     new SmoothScroll();
     new HeaderScroll();
+    new CertificateLightbox();
     // ParallaxEffect removed to prevent gap between sections
 
     // Initial page load animation
@@ -1131,6 +1132,74 @@ document.addEventListener('DOMContentLoaded', () => {
     // Loading animation complete
     console.log('Portfolio loaded successfully! ✨');
 });
+
+// ===================================
+// Certificate Lightbox
+// ===================================
+class CertificateLightbox {
+    constructor() {
+        this.lightbox = document.getElementById('certificateLightbox');
+        this.lightboxImage = document.getElementById('lightboxImage');
+        this.lightboxClose = document.getElementById('lightboxClose');
+        this.certificateImages = document.querySelectorAll('.certificate-image');
+
+        this.init();
+    }
+
+    init() {
+        if (!this.lightbox || !this.lightboxImage) {
+            console.error('❌ Lightbox elements not found!');
+            return;
+        }
+
+        console.log('🖼️ Certificate lightbox initialized');
+
+        // Add click event to all certificate images
+        this.certificateImages.forEach(imageContainer => {
+            imageContainer.addEventListener('click', (e) => {
+                const img = imageContainer.querySelector('img');
+                if (img) {
+                    this.openLightbox(img.src, img.alt);
+                }
+            });
+        });
+
+        // Close button
+        this.lightboxClose.addEventListener('click', () => {
+            this.closeLightbox();
+        });
+
+        // Click outside to close
+        this.lightbox.addEventListener('click', (e) => {
+            if (e.target === this.lightbox) {
+                this.closeLightbox();
+            }
+        });
+
+        // ESC key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.lightbox.classList.contains('active')) {
+                this.closeLightbox();
+            }
+        });
+
+        console.log('✅ Lightbox event listeners attached');
+    }
+
+    openLightbox(src, alt) {
+        this.lightboxImage.src = src;
+        this.lightboxImage.alt = alt;
+        this.lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+        console.log('🖼️ Lightbox opened:', alt);
+    }
+
+    closeLightbox() {
+        this.lightbox.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+        console.log('🖼️ Lightbox closed');
+    }
+}
 
 // ===================================
 // Add resize listener to update animations
