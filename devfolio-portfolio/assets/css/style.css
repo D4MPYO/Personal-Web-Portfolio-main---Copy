@@ -1286,7 +1286,32 @@ body.light-theme .theme-toggle .bx-sun {
     line-height: 1.6;
 }
 
-/* Tech Badges */
+/* Tech Icons - Visible by default, scattered positioning */
+.project-tech-icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.project-tech-icons img {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: var(--transition-default);
+    pointer-events: all;
+}
+
+.project-tech-icons img:hover {
+    transform: scale(1.1);
+}
+
+/* Tech Badges - Inside hover content */
 .project-tech {
     display: flex;
     gap: 0.75rem;
