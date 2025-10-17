@@ -454,48 +454,21 @@ class ScrollAnimations {
         const collaborationTitle = document.querySelector('.collaboration-title');
 
         if (collaborationTitle) {
-            // Animate the gradient text
-            const textGradient = collaborationTitle.querySelector('.text-gradient-animated');
-
-            if (textGradient) {
-                gsap.from(textGradient, {
-                    backgroundPosition: '0% 0%',
-                    duration: 2,
-                    scrollTrigger: {
-                        trigger: collaborationTitle,
-                        start: 'top 70%',
-                        end: 'center center',
-                        scrub: 1
-                    }
-                });
-            }
-
-            // Slide animations for background text
-            const textTop = document.querySelector('.collaboration-text-top');
-            const textBottom = document.querySelector('.collaboration-text-bottom');
-
-            if (textTop && textBottom) {
-                gsap.to(textTop, {
-                    xPercent: -150,
-                    scrollTrigger: {
-                        trigger: '.collaboration',
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: 1
-                    }
-                });
-
-                gsap.from(textBottom, {
-                    xPercent: -150,
-                    scrollTrigger: {
-                        trigger: '.collaboration',
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: 1
-                    }
-                });
-            }
+            // Simple fade-in animation for the title
+            gsap.from(collaborationTitle, {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: collaborationTitle,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
         }
+
+        // No GSAP animations for scrolling text - pure CSS animations handle it
+        console.log('✅ Collaboration section initialized with CSS animations');
     }
 }
 
