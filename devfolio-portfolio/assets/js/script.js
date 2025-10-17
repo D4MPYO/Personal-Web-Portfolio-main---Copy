@@ -645,6 +645,16 @@ class SkillsWheel {
         // Setup drag functionality
         this.setupDrag();
 
+        // Add resize listener to reposition cards
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                console.log('📐 Window resized - repositioning cards');
+                this.positionCards();
+            }, 250);
+        });
+
         // Start auto-spin after a short delay
         setTimeout(() => {
             console.log('🚀 Starting auto-spin...');
@@ -653,7 +663,26 @@ class SkillsWheel {
     }
 
     positionCards() {
-        const radius = 550; // Adjusted radius to match wheel size
+        // RESPONSIVE RADIUS - adjusts based on screen width
+        let radius;
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth <= 480) {
+            // Small mobile - 600px wheel = 300px radius / 2 = 150px usable
+            radius = 230;
+        } else if (screenWidth <= 768) {
+            // Mobile - 800px wheel = 400px radius / 2 = 200px usable
+            radius = 320;
+        } else if (screenWidth <= 1024) {
+            // Tablet - 1200px wheel = 600px radius / 2 = 300px usable
+            radius = 500;
+        } else {
+            // Desktop - 1400px wheel = 700px radius / 2 = 350px usable
+            radius = 550;
+        }
+
+        console.log('🎡 Positioning cards with radius:', radius, 'px for screen width:', screenWidth, 'px');
+
         // FULL CIRCLE positioning - all 360 degrees
         const angleStep = (2 * Math.PI) / this.cards.length;
 
