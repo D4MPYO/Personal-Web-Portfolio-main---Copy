@@ -693,6 +693,11 @@ body.light-theme .theme-toggle .bx-sun {
     min-height: 3rem;
 }
 
+.subtitle-prefix {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
 .cursor-blink {
     animation: blink 1s infinite;
 }
