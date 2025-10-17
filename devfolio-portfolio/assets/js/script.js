@@ -153,6 +153,9 @@ class ThemeToggle {
             } else {
                 localStorage.setItem('theme', 'dark');
             }
+
+            // Trigger scroll event to update header background
+            window.dispatchEvent(new Event('scroll'));
         });
     }
 }
@@ -578,15 +581,30 @@ class HeaderScroll {
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
+            const isLightMode = document.body.classList.contains('light-theme');
 
             if (currentScroll > 100) {
-                this.header.style.background = 'rgba(0, 0, 0, 0.95)';
-                this.header.style.backdropFilter = 'blur(20px)';
-                this.header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                // Check if light mode or dark mode
+                if (isLightMode) {
+                    this.header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    this.header.style.backdropFilter = 'blur(20px)';
+                    this.header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    this.header.style.background = 'rgba(0, 0, 0, 0.95)';
+                    this.header.style.backdropFilter = 'blur(20px)';
+                    this.header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                }
             } else {
-                this.header.style.background = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent)';
-                this.header.style.backdropFilter = 'blur(10px)';
-                this.header.style.boxShadow = 'none';
+                // At the top - use gradient
+                if (isLightMode) {
+                    this.header.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent)';
+                    this.header.style.backdropFilter = 'blur(10px)';
+                    this.header.style.boxShadow = 'none';
+                } else {
+                    this.header.style.background = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent)';
+                    this.header.style.backdropFilter = 'blur(10px)';
+                    this.header.style.boxShadow = 'none';
+                }
             }
 
             lastScroll = currentScroll;
@@ -1171,13 +1189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power3.out'
     });
 
-    gsap.from('.social-links a', {
-        opacity: 0,
-        x: -30,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 0.8,
-        ease: 'power2.out'
+    // Social links - SET to fully visible immediately (no animation)
+    gsap.set('.social-links a', {
+        opacity: 1,
+        x: 0
     });
 
     // Loading animation complete
