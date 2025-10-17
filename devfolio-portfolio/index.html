@@ -148,8 +148,28 @@
             </div>
 
             <div class="about-content">
-                <div class="about-image">
-                    <img src="../Image/Picture ko.png" alt="Jonard Gan">
+                <div class="about-image-wrapper">
+                    <div class="about-image">
+                        <img src="../Image/Picture ko.png" alt="Jonard Gan">
+                    </div>
+                    <!-- Contact Card -->
+                    <div class="about-contact-card">
+                        <div class="contact-card-item">
+                            <i class='bx bxs-user'></i>
+                            <span>Jonard Gan</span>
+                        </div>
+                        <div class="contact-card-item">
+                            <i class='bx bxs-phone'></i>
+                            <span>+63 961 787 4944</span>
+                        </div>
+                        <div class="contact-card-item">
+                            <i class='bx bxl-gmail'></i>
+                            <span>jonardgan01@gmail.com</span>
+                        </div>
+                        <a href="#" class="download-cv-btn">
+                            Download CV
+                        </a>
+                    </div>
                 </div>
                 <div class="about-text">
                     <h3 class="about-intro-title">Introduction</h3>
@@ -424,6 +444,7 @@
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">My Skills</h2>
+                <p class="section-subtitle">Technologies and tools I work with</p>
             </div>
 
             <div class="skills-wheel-wrapper">
@@ -536,200 +557,253 @@
 
             <div class="projects-grid">
                 <!-- Project 1: VPES-SIMS (ONGOING) -->
-                <div class="project-card" data-gradient="linear-gradient(90deg, #667eea 0%, #764ba2 100%)">
-                    <div class="project-bg"></div>
-                    <img src="../Image/VPES-SIMS.png" alt="VPES-SIMS" class="project-image">
-
-                    <!-- Tech Icons - Bottom Center -->
-                    <div class="project-tech-icons">
-                        <img src="../Image/SVG/php.svg" alt="PHP">
-                        <img src="../Image/SVG/mysql-logo-svgrepo-com.svg" alt="MySQL">
-                        <img src="../Image/SVG/firebase.svg" alt="Firebase">
-                        <img src="../Image/SVG/html5.svg" alt="HTML5">
-                        <img src="../Image/SVG/css3.svg" alt="CSS3">
-                        <img src="../Image/SVG/JavaScript.svg" alt="JavaScript">
+                <div class="project-card">
+                    <!-- Left: Browser Mockup -->
+                    <div class="project-browser">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <img src="../Image/VPES-SIMS.png" alt="VPES-SIMS" class="project-image">
+                        </div>
                     </div>
 
-                    <div class="project-content">
-                        <h3 class="project-name">VPES-SIMS <span style="font-size: 0.8rem; color: #ffd700;">(ONGOING)</span></h3>
-                        <p class="project-description">
-                            Vinzons Pilot Elementary School - School Information Management System. A comprehensive web-based platform for managing student records, enrollment, and school operations.
+                    <!-- Right: Project Info -->
+                    <div class="project-info">
+                        <h3 class="project-title">VPES-SIMS <span class="project-badge">(ONGOING)</span></h3>
+                        <p class="project-overview">
+                            <strong>OVERVIEW:</strong> Developed a comprehensive web-based platform for managing student records, enrollment, and school operations at Vinzons Pilot Elementary School.
                         </p>
-                        <div class="project-tech">
-                            <span>PHP</span>
-                            <span>MySQL</span>
-                            <span>Firebase</span>
-                            <span>HTML5</span>
-                            <span>CSS3</span>
-                            <span>JavaScript</span>
+
+                        <!-- Tech Stack Icons -->
+                        <div class="project-stack">
+                            <img src="../Image/SVG/php.svg" alt="PHP" title="PHP">
+                            <img src="../Image/SVG/mysql-logo-svgrepo-com.svg" alt="MySQL" title="MySQL">
+                            <img src="../Image/SVG/firebase.svg" alt="Firebase" title="Firebase">
+                            <img src="../Image/SVG/html5.svg" alt="HTML5" title="HTML5">
+                            <img src="../Image/SVG/css3.svg" alt="CSS3" title="CSS3">
+                            <img src="../Image/SVG/JavaScript.svg" alt="JavaScript" title="JavaScript">
+                        </div>
+
+                        <div class="project-links-label">Project Links</div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/D4MPYO" class="project-btn" target="_blank">
+                                <i class='bx bxl-github'></i>
+                                <span>Github</span>
+                            </a>
+                            <a href="#" class="project-btn" target="_blank">
+                                <i class='bx bx-link-external'></i>
+                                <span>Live Link</span>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 2: Liham Cafe V2 -->
-                <div class="project-card" data-gradient="linear-gradient(90deg, #142D46 0%, #2E4964 100%)">
-                    <div class="project-bg"></div>
-                    <img src="../Image/Liham-cafe-v2.png" alt="Liham Cafe V2" class="project-image">
-
-                    <!-- Tech Icons - Bottom Center -->
-                    <div class="project-tech-icons">
-                        <img src="../Image/SVG/php.svg" alt="PHP">
-                        <img src="../Image/SVG/mysql-logo-svgrepo-com.svg" alt="MySQL">
-                        <img src="../Image/SVG/html5.svg" alt="HTML5">
-                        <img src="../Image/SVG/css3.svg" alt="CSS3">
-                        <img src="../Image/SVG/JavaScript.svg" alt="JavaScript">
+                <div class="project-card">
+                    <!-- Left: Browser Mockup -->
+                    <div class="project-browser">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <img src="../Image/Liham-cafe-v2.png" alt="Liham Cafe V2" class="project-image">
+                        </div>
                     </div>
 
-                    <div class="project-content">
-                        <h3 class="project-name">Liham Cafe V2</h3>
-                        <p class="project-description">
-                            Coffee shop website with improved UI/UX design, dynamic menu system, and
-                            responsive layout for seamless user experience.
+                    <!-- Right: Project Info -->
+                    <div class="project-info">
+                        <h3 class="project-title">LIHAM CAFE V2</h3>
+                        <p class="project-overview">
+                            <strong>OVERVIEW:</strong> Coffee shop website with improved UI/UX design, dynamic menu system, and responsive layout for seamless user experience.
                         </p>
-                        <div class="project-tech">
-                            <span>PHP</span>
-                            <span>MySQL</span>
-                            <span>HTML5</span>
-                            <span>CSS3</span>
-                            <span>JavaScript</span>
+
+                        <!-- Tech Stack Icons -->
+                        <div class="project-stack">
+                            <img src="../Image/SVG/php.svg" alt="PHP" title="PHP">
+                            <img src="../Image/SVG/mysql-logo-svgrepo-com.svg" alt="MySQL" title="MySQL">
+                            <img src="../Image/SVG/html5.svg" alt="HTML5" title="HTML5">
+                            <img src="../Image/SVG/css3.svg" alt="CSS3" title="CSS3">
+                            <img src="../Image/SVG/JavaScript.svg" alt="JavaScript" title="JavaScript">
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/D4MPYO/Liham-Cafe-V.2" class="link" target="_blank">
+
+                        <div class="project-links-label">Project Links</div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/D4MPYO/Liham-Cafe-V.2" class="project-btn" target="_blank">
                                 <i class='bx bxl-github'></i>
+                                <span>Github</span>
                             </a>
-                            <a href="https://d4mpyo.github.io/Liham-Cafe-V.2/" class="link" target="_blank">
+                            <a href="https://d4mpyo.github.io/Liham-Cafe-V.2/" class="project-btn" target="_blank">
                                 <i class='bx bx-link-external'></i>
+                                <span>Live Link</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 3: Atomuklas -->
-                <div class="project-card" data-gradient="linear-gradient(90deg, #FFA62E 0%, #EA4D2C 100%)">
-                    <div class="project-bg"></div>
-                    <img src="../Image/atomuklas.png" alt="Atomuklas" class="project-image">
-
-                    <!-- Tech Icons - Bottom Center -->
-                    <div class="project-tech-icons">
-                        <img src="../Image/SVG/java.svg" alt="Java">
-                        <img src="../Image/SVG/kotlin.svg" alt="Kotlin">
+                <div class="project-card">
+                    <div class="project-browser">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <img src="../Image/atomuklas.png" alt="Atomuklas" class="project-image">
+                        </div>
                     </div>
 
-                    <div class="project-content">
-                        <h3 class="project-name">Atomuklas</h3>
-                        <p class="project-description">
-                            A science-focused Android app developed for educational research. Features lessons
-                            on atomic structure, 3D models, and interactive quiz games with real-time feedback.
+                    <div class="project-info">
+                        <h3 class="project-title">ATOMUKLAS</h3>
+                        <p class="project-overview">
+                            <strong>OVERVIEW:</strong> A science-focused Android app developed for educational research. Features lessons on atomic structure, 3D models, and interactive quiz games with real-time feedback.
                         </p>
-                        <div class="project-tech">
-                            <span>Java</span>
-                            <span>XML</span>
-                            <span>Kotlin</span>
+
+                        <div class="project-stack">
+                            <img src="../Image/SVG/java.svg" alt="Java" title="Java">
+                            <img src="../Image/SVG/kotlin.svg" alt="Kotlin" title="Kotlin">
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/D4MPYO" class="link" target="_blank">
+
+                        <div class="project-links-label">Project Links</div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/D4MPYO" class="project-btn" target="_blank">
                                 <i class='bx bxl-github'></i>
+                                <span>Github</span>
                             </a>
-                            <a href="https://atomuklas.netlify.app/" class="link" target="_blank">
+                            <a href="https://atomuklas.netlify.app/" class="project-btn" target="_blank">
                                 <i class='bx bx-link-external'></i>
+                                <span>Live Link</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 4: AnaphyMaster -->
-                <div class="project-card" data-gradient="linear-gradient(90deg, #F14658 0%, #DC2537 100%)">
-                    <div class="project-bg"></div>
-                    <img src="../Image/anaphymasters.png" alt="AnaphyMaster" class="project-image">
-
-                    <!-- Tech Icons - Bottom Center -->
-                    <div class="project-tech-icons">
-                        <img src="../Image/SVG/java.svg" alt="Java">
-                        <img src="../Image/SVG/kotlin.svg" alt="Kotlin">
+                <div class="project-card">
+                    <div class="project-browser">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <img src="../Image/anaphymasters.png" alt="AnaphyMaster" class="project-image">
+                        </div>
                     </div>
 
-                    <div class="project-content">
-                        <h3 class="project-name">AnaphyMaster</h3>
-                        <p class="project-description">
-                            Mobile application for anatomy and physiology students. Features categorized quizzes,
-                            user-friendly interface, and progress tracking for medical students.
+                    <div class="project-info">
+                        <h3 class="project-title">ANAPHYMASTER</h3>
+                        <p class="project-overview">
+                            <strong>OVERVIEW:</strong> Mobile application for anatomy and physiology students. Features categorized quizzes, user-friendly interface, and progress tracking for medical students.
                         </p>
-                        <div class="project-tech">
-                            <span>Java</span>
-                            <span>XML</span>
-                            <span>Kotlin</span>
+
+                        <div class="project-stack">
+                            <img src="../Image/SVG/java.svg" alt="Java" title="Java">
+                            <img src="../Image/SVG/kotlin.svg" alt="Kotlin" title="Kotlin">
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/D4MPYO" class="link" target="_blank">
+
+                        <div class="project-links-label">Project Links</div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/D4MPYO" class="project-btn" target="_blank">
                                 <i class='bx bxl-github'></i>
+                                <span>Github</span>
                             </a>
-                            <a href="https://anaphymaster.netlify.app/" class="link" target="_blank">
+                            <a href="https://anaphymaster.netlify.app/" class="project-btn" target="_blank">
                                 <i class='bx bx-link-external'></i>
+                                <span>Live Link</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 5: PassCSE -->
-                <div class="project-card" data-gradient="linear-gradient(90deg, #000066 0%, #6699FF 100%)">
-                    <div class="project-bg"></div>
-                    <img src="../Image/sample.png" alt="PassCSE" class="project-image">
-
-                    <!-- Tech Icons - Bottom Center -->
-                    <div class="project-tech-icons">
-                        <img src="../Image/SVG/java.svg" alt="Java">
+                <div class="project-card">
+                    <div class="project-browser">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <img src="../Image/sample.png" alt="PassCSE" class="project-image">
+                        </div>
                     </div>
 
-                    <div class="project-content">
-                        <h3 class="project-name">PassCSE</h3>
-                        <p class="project-description">
-                            Mobile reviewer app for Civil Service Exam preparation. Features timed assessments,
-                            randomized questions, and comprehensive score tracking.
+                    <div class="project-info">
+                        <h3 class="project-title">PASSCSE</h3>
+                        <p class="project-overview">
+                            <strong>OVERVIEW:</strong> Mobile reviewer app for Civil Service Exam preparation. Features timed assessments, randomized questions, and comprehensive score tracking.
                         </p>
-                        <div class="project-tech">
-                            <span>Java</span>
-                            <span>XML</span>
+
+                        <div class="project-stack">
+                            <img src="../Image/SVG/java.svg" alt="Java" title="Java">
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/D4MPYO" class="link" target="_blank">
+
+                        <div class="project-links-label">Project Links</div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/D4MPYO" class="project-btn" target="_blank">
                                 <i class='bx bxl-github'></i>
+                                <span>Github</span>
                             </a>
-                            <a href="https://passcse.netlify.app/" class="link" target="_blank">
+                            <a href="https://passcse.netlify.app/" class="project-btn" target="_blank">
                                 <i class='bx bx-link-external'></i>
+                                <span>Live Link</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 6: Liham Cafe V1 -->
-                <div class="project-card" data-gradient="linear-gradient(90deg, #4A5568 0%, #2D3748 100%)">
-                    <div class="project-bg"></div>
-                    <img src="../Image/Liham-cafe-v1.png" alt="Liham Cafe V1" class="project-image">
-
-                    <!-- Tech Icons - Bottom Center -->
-                    <div class="project-tech-icons">
-                        <img src="../Image/SVG/html5.svg" alt="HTML5">
-                        <img src="../Image/SVG/css3.svg" alt="CSS3">
-                        <img src="../Image/SVG/JavaScript.svg" alt="JavaScript">
+                <div class="project-card">
+                    <div class="project-browser">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="browser-content">
+                            <img src="../Image/Liham-cafe-v1.png" alt="Liham Cafe V1" class="project-image">
+                        </div>
                     </div>
 
-                    <div class="project-content">
-                        <h3 class="project-name">Liham Cafe V1</h3>
-                        <p class="project-description">
-                            First version of Liham Cafe website. A simple, elegant coffee shop website featuring
-                            menu showcase, location info, and contact details.
+                    <div class="project-info">
+                        <h3 class="project-title">LIHAM CAFE V1</h3>
+                        <p class="project-overview">
+                            <strong>OVERVIEW:</strong> First version of Liham Cafe website. A simple, elegant coffee shop website featuring menu showcase, location info, and contact details.
                         </p>
-                        <div class="project-tech">
-                            <span>HTML5</span>
-                            <span>CSS3</span>
-                            <span>JavaScript</span>
+
+                        <div class="project-stack">
+                            <img src="../Image/SVG/html5.svg" alt="HTML5" title="HTML5">
+                            <img src="../Image/SVG/css3.svg" alt="CSS3" title="CSS3">
+                            <img src="../Image/SVG/JavaScript.svg" alt="JavaScript" title="JavaScript">
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/D4MPYO" class="link" target="_blank">
+
+                        <div class="project-links-label">Project Links</div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/D4MPYO" class="project-btn" target="_blank">
                                 <i class='bx bxl-github'></i>
+                                <span>Github</span>
                             </a>
-                            <a href="#" class="link" target="_blank">
+                            <a href="#" class="project-btn" target="_blank">
                                 <i class='bx bx-link-external'></i>
+                                <span>Live Link</span>
                             </a>
                         </div>
                     </div>

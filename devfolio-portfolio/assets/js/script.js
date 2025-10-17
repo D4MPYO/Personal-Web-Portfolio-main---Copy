@@ -396,30 +396,42 @@ class ScrollAnimations {
         const projectCards = document.querySelectorAll('.project-card');
 
         projectCards.forEach((card, index) => {
-            // Set gradient background
-            const gradient = card.getAttribute('data-gradient');
-            if (gradient) {
-                card.style.background = gradient;
+            const browserSection = card.querySelector('.project-browser');
+            const infoSection = card.querySelector('.project-info');
+
+            // Animate left section (browser mockup) - slide in from left with fade
+            if (browserSection) {
+                gsap.from(browserSection, {
+                    opacity: 0,
+                    x: -100,
+                    duration: 0.8,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    delay: index * 0.1
+                });
             }
 
-            // Initial animation on scroll
-            gsap.from(card, {
-                opacity: 0,
-                y: 100,
-                rotation: -5,
-                duration: 0.8,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                delay: index * 0.1
-            });
+            // Animate right section (project info) - slide in from right with fade
+            if (infoSection) {
+                gsap.from(infoSection, {
+                    opacity: 0,
+                    x: 100,
+                    duration: 0.8,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    delay: index * 0.1 + 0.2
+                });
+            }
 
-            // Hover animation using GSAP (desktop)
+            // Hover animation for card container
             card.addEventListener('mouseenter', () => {
                 gsap.to(card, {
-                    scale: 1.02,
                     boxShadow: '0 20px 60px rgba(139, 49, 255, 0.4)',
                     duration: 0.4,
                     ease: 'power2.out'
@@ -428,35 +440,14 @@ class ScrollAnimations {
 
             card.addEventListener('mouseleave', () => {
                 gsap.to(card, {
-                    scale: 1,
                     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
                     duration: 0.4,
                     ease: 'power2.out'
                 });
             });
-
-            // Mobile tap functionality - show description for 5 seconds
-            let tapTimeout = null;
-            card.addEventListener('click', (e) => {
-                // Only trigger on mobile (screen width < 968px)
-                if (window.innerWidth >= 968) return;
-
-                e.preventDefault();
-
-                // Clear previous timeout if exists
-                if (tapTimeout) {
-                    clearTimeout(tapTimeout);
-                }
-
-                // Add active class to show description
-                card.classList.add('active');
-
-                // Auto-hide after 5 seconds
-                tapTimeout = setTimeout(() => {
-                    card.classList.remove('active');
-                }, 5000);
-            });
         });
+
+        console.log('✅ Project cards GSAP animations initialized');
     }
 
     initCollaborationAnimation() {
