@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(start index.html)",
-      "Bash(start \"\" \"C:\\Users\\ADMIN\\Desktop\\Personal-Web-Portfolio-main - Copy\\devfolio-portfolio\\index.html\")"
+      "Bash(start \"\" \"C:\\Users\\ADMIN\\Desktop\\Personal-Web-Portfolio-main - Copy\\devfolio-portfolio\\index.html\")",
+      "Read(//c/**)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []
