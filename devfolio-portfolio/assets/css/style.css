@@ -72,11 +72,6 @@ body.light-theme {
     box-sizing: border-box;
 }
 
-@media (min-width: 769px) {
-    * {
-        cursor: none;
-    }
-}
 
 html {
     scroll-behavior: smooth;
@@ -137,45 +132,6 @@ body {
     color: var(--color-white);
 }
 
-/* ===================================
-   Custom Cursor
-   ================================ */
-.cursor,
-.cursor-follower {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: transform 0.2s ease;
-}
-
-.cursor {
-    width: 1rem;
-    height: 1rem;
-    background-color: var(--color-white);
-    transform: translate(-50%, -50%);
-}
-
-.cursor-follower {
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 255, 255, 0.02);
-    transform: translate(-50%, -50%);
-}
-
-.cursor.hover,
-.cursor-follower.hover {
-    transform: translate(-50%, -50%) scale(1.5);
-}
-
-@media (max-width: 768px) {
-    .cursor,
-    .cursor-follower {
-        display: none;
-    }
-}
 
 /* ===================================
    Progress Bar
@@ -261,7 +217,7 @@ body {
 }
 
 .link {
-    cursor: none !important;
+    cursor: pointer !important;
 }
 
 /* ===================================
@@ -277,7 +233,7 @@ body {
     transition: var(--transition-default);
     border: none;
     outline: none;
-    cursor: none;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
 }
@@ -405,7 +361,7 @@ body.light-theme .theme-toggle .bx-sun {
     width: 1.5rem;
     height: 1.5rem;
     position: relative;
-    cursor: none;
+    cursor: pointer;
 }
 
 .soundbar span {
@@ -475,7 +431,7 @@ body.light-theme .theme-toggle .bx-sun {
     width: 1.5rem;
     height: 1.5rem;
     z-index: 1001;
-    cursor: none;
+    cursor: pointer;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
@@ -547,6 +503,7 @@ body.light-theme .theme-toggle .bx-sun {
     justify-content: center;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 999;
     overflow-y: auto;
@@ -555,6 +512,7 @@ body.light-theme .theme-toggle .bx-sun {
 .menu-checkbox:checked ~ .fullscreen-menu {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .menu-content {
@@ -868,54 +826,216 @@ body.light-theme .theme-toggle .bx-sun {
 }
 
 /* ===================================
-   Skills Section
+   Skills Section - Semi-Circular Wheel
    ================================ */
 .skills {
     padding: 4rem 0 !important;
+    overflow: visible;
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 2rem;
-    max-width: 1100px;
+.skills-wheel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%; /* NO LIMIT! */
     margin: 0 auto;
 }
 
-.skill-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.75rem 1.5rem;
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(139, 49, 255, 0.2);
-    transition: var(--transition-default);
-    min-height: 140px;
+/* Drag Me Indicator */
+.drag-me-indicator {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-secondary);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    z-index: 20;
 }
 
-.skill-card:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(139, 49, 255, 0.3);
+.drag-me-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Semi-Circular Wheel Container - FULL WIDTH */
+.skills-wheel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%; /* NO LIMIT! */
+    height: 750px; /* Increased height to prevent cropping */
+    margin: 0 auto;
+    margin-top: -80px; /* Pull wheel up closer to title */
+    overflow: hidden; /* HIDE BOTTOM HALF - SEMI CIRCLE ONLY! */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 20px; /* Minimal padding - wheel closer to title */
+}
+
+/* Collision Point (invisible detection point at top center) */
+.collision-point {
+    position: absolute;
+    z-index: 100;
+    top: 40px; /* Adjusted for minimal padding */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 2px;
+    pointer-events: none;
+}
+
+/* Rotating Wheel - CENTERED AT BOTTOM */
+.skills-wheel {
+    position: absolute;
+    width: 1400px;
+    height: 1400px;
+    top: 100%; /* Position at bottom of container */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    cursor: grab;
+}
+
+.skills-wheel:active {
+    cursor: grabbing;
+}
+
+/* Hidden SVG Path for positioning */
+.skills-path-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Individual Skill Cards - PERFECT SQUARE (NO DISTORTION) */
+.skill-card {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    left: 50%;
+    top: 50%;
+    margin-left: -90px;
+    margin-top: -90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 2rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+    transition: box-shadow 0.3s ease;
+    pointer-events: all;
+    will-change: transform;
+}
+
+.skill-card:active {
+    cursor: grabbing;
 }
 
 .skill-card img {
-    width: 55px;
-    height: 55px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
+    pointer-events: none;
+    user-select: none;
 }
 
-.skill-card span {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--text-primary);
+/* Focused skill (center top) scale effect */
+.skill-card.focused {
+    box-shadow: 0 25px 60px rgba(139, 49, 255, 0.6);
+    z-index: 10;
+    filter: brightness(1.1);
+}
+
+/* Description Box - CENTERED inside semi-circle */
+.skill-description-box {
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
     text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.skill-description-box.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.skill-description-box .skill-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.skill-description-box .skill-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 40ch;
+    margin: 0 auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .drag-me-indicator {
+        top: 100px;
+        right: 20px;
+        font-size: 1.3rem;
+    }
+
+    .skills-wheel-container {
+        height: 350px;
+    }
+
+    .skills-wheel {
+        width: 600px;
+        height: 600px;
+        top: 30px;
+    }
+
+    .skill-card {
+        width: 120px;
+        height: 120px;
+        margin-left: -60px;
+        margin-top: -60px;
+        padding: 1rem;
+    }
+
+    .skill-card img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .skill-description-box {
+        max-width: 90%;
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .skill-description-box .skill-name {
+        font-size: 1.4rem;
+    }
+
+    .skill-description-box .skill-desc {
+        font-size: 0.9rem;
+    }
 }
 
 /* ===================================
@@ -943,7 +1063,7 @@ body.light-theme .theme-toggle .bx-sun {
     flex-direction: column;
     justify-content: space-between;
     transition: var(--transition-default);
-    cursor: none;
+    cursor: pointer;
     transform-style: preserve-3d;
     perspective: 1000px;
 }
@@ -1169,7 +1289,7 @@ body.light-theme .theme-toggle .bx-sun {
     font-family: inherit;
     font-size: 1rem;
     transition: var(--transition-default);
-    cursor: none;
+    cursor: pointer;
 }
 
 .form-group input:focus,
@@ -1434,7 +1554,7 @@ body.light-theme .theme-toggle .bx-sun {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: none;
+    cursor: pointer;
     transition: var(--transition-default);
 }
 

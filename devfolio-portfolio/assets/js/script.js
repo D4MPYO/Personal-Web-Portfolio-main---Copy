@@ -16,52 +16,6 @@ if (typeof gsap !== 'undefined') {
     console.error('❌ GSAP NOT LOADED! Check assets/js/gsap.min.js');
 }
 
-// ===================================
-// Custom Cursor
-// ===================================
-class CustomCursor {
-    constructor() {
-        this.cursor = document.querySelector('.cursor');
-        this.follower = document.querySelector('.cursor-follower');
-        this.links = document.querySelectorAll('.link');
-
-        this.init();
-    }
-
-    init() {
-        if (window.innerWidth <= 768) return; // Disable on mobile
-
-        // Move cursor
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(this.cursor, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.1,
-                ease: 'none'
-            });
-
-            gsap.to(this.follower, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.3,
-                ease: 'none'
-            });
-        });
-
-        // Hover effects on links
-        this.links.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                this.cursor.classList.add('hover');
-                this.follower.classList.add('hover');
-            });
-
-            link.addEventListener('mouseleave', () => {
-                this.cursor.classList.remove('hover');
-                this.follower.classList.remove('hover');
-            });
-        });
-    }
-}
 
 // ===================================
 // Progress Bar
@@ -624,17 +578,322 @@ class HeaderScroll {
 // Removed to prevent gap between hero and about sections
 
 // ===================================
+// Semi-Circular Skills Wheel with GSAP (Draggable + Snap)
+// ===================================
+class SkillsWheel {
+    constructor() {
+        this.wheel = document.getElementById('skillsWheel');
+        this.cards = document.querySelectorAll('.skill-card');
+        this.descriptionBox = document.getElementById('skillDescription');
+        this.dragIndicator = document.querySelector('.drag-me-indicator');
+        this.collisionPoint = document.getElementById('collisionPoint');
+
+        this.currentRotation = 0;
+        this.isDragging = false;
+        this.hasInteracted = false;
+        this.activeIndex = null;
+        this.velocity = 0;
+        this.lastAngle = 0;
+        this.lastTime = Date.now();
+
+        this.init();
+    }
+
+    init() {
+        if (!this.wheel || this.cards.length === 0) return;
+
+        console.log('🎡 Semi-circular wheel initialized with', this.cards.length, 'skills');
+
+        // Position cards in a circle
+        this.positionCards();
+
+        // Set initial active card
+        this.setActiveCard(0);
+
+        // Setup drag functionality
+        this.setupDrag();
+    }
+
+    positionCards() {
+        const radius = 550; // Adjusted radius to match wheel size
+        // FULL CIRCLE positioning - all 360 degrees
+        const angleStep = (2 * Math.PI) / this.cards.length;
+
+        this.cards.forEach((card, index) => {
+            const angle = angleStep * index;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+
+            // NO ROTATION - Keep cards perfectly square and straight!
+            gsap.set(card, {
+                x: x,
+                y: y,
+                rotation: 0
+            });
+        });
+    }
+
+    setupDrag() {
+        let startAngle = 0;
+
+        // Get angle from mouse position
+        const getAngle = (e) => {
+            const rect = this.wheel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+            return Math.atan2(clientY - centerY, clientX - centerX);
+        };
+
+        const onMouseDown = (e) => {
+            e.preventDefault();
+            this.isDragging = true;
+            const angle = getAngle(e);
+            startAngle = angle - (this.currentRotation * Math.PI / 180);
+            this.lastAngle = angle;
+            this.lastTime = Date.now();
+            this.velocity = 0;
+
+            // Show description on drag start
+            if (!this.hasInteracted) {
+                this.hasInteracted = true;
+                if (this.dragIndicator) {
+                    gsap.to(this.dragIndicator, {
+                        opacity: 0,
+                        duration: 0.5,
+                        onComplete: () => this.dragIndicator.classList.add('hidden')
+                    });
+                }
+            }
+
+            // Set active to null during drag
+            this.setActiveCard(null);
+
+            console.log('🖱️ Drag started');
+        };
+
+        const onMouseMove = (e) => {
+            if (!this.isDragging) return;
+
+            const currentTime = Date.now();
+            const currentAngle = getAngle(e);
+            const deltaTime = currentTime - this.lastTime;
+
+            if (deltaTime > 0) {
+                let deltaAngle = currentAngle - this.lastAngle;
+
+                // Handle angle wrap-around
+                if (deltaAngle > Math.PI) deltaAngle -= 2 * Math.PI;
+                if (deltaAngle < -Math.PI) deltaAngle += 2 * Math.PI;
+
+                // Calculate velocity
+                this.velocity = deltaAngle / deltaTime * 16;
+            }
+
+            const rotation = (currentAngle - startAngle) * 180 / Math.PI;
+            this.currentRotation = rotation;
+
+            gsap.set(this.wheel, {
+                rotation: rotation
+            });
+
+            // Update card rotations to keep them upright
+            this.updateCardRotations();
+
+            this.lastAngle = currentAngle;
+            this.lastTime = currentTime;
+        };
+
+        const onMouseUp = () => {
+            if (!this.isDragging) return;
+
+            this.isDragging = false;
+
+            console.log('🖱️ Drag ended - velocity:', this.velocity.toFixed(3));
+
+            // Apply inertia/momentum
+            if (Math.abs(this.velocity) > 0.001) {
+                this.applyMomentum();
+            } else {
+                // Snap to nearest card immediately
+                this.snapToNearest();
+            }
+        };
+
+        this.wheel.addEventListener('mousedown', onMouseDown);
+        this.wheel.addEventListener('touchstart', onMouseDown);
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('touchmove', onMouseMove);
+
+        document.addEventListener('mouseup', onMouseUp);
+        document.addEventListener('touchend', onMouseUp);
+    }
+
+    applyMomentum() {
+        const momentumStep = () => {
+            // Apply friction
+            this.velocity *= 0.95;
+
+            // Stop when velocity is too small
+            if (Math.abs(this.velocity) < 0.001) {
+                // Snap to nearest card
+                this.snapToNearest();
+                return;
+            }
+
+            // Apply velocity to rotation
+            this.currentRotation += this.velocity * 2;
+
+            gsap.set(this.wheel, {
+                rotation: this.currentRotation
+            });
+
+            // Update card rotations
+            this.updateCardRotations();
+
+            // Continue animation
+            requestAnimationFrame(momentumStep);
+        };
+
+        momentumStep();
+    }
+
+    snapToNearest() {
+        const anglePerCard = 360 / this.cards.length;
+
+        // Calculate nearest snap position
+        const nearestSnap = Math.round(this.currentRotation / anglePerCard) * anglePerCard;
+
+        // Animate to snap position
+        gsap.to(this.wheel, {
+            rotation: nearestSnap,
+            duration: 0.3,
+            ease: 'power2.out',
+            onUpdate: () => {
+                this.currentRotation = gsap.getProperty(this.wheel, 'rotation');
+                this.updateCardRotations();
+            },
+            onComplete: () => {
+                this.currentRotation = nearestSnap;
+                this.detectActiveCard();
+            }
+        });
+
+        console.log('📍 Snapping to', nearestSnap, 'degrees');
+    }
+
+    detectActiveCard() {
+        // Find the card CLOSEST to the top-center collision point
+        const collisionRect = this.collisionPoint.getBoundingClientRect();
+        const collisionCenterX = collisionRect.left + collisionRect.width / 2;
+        const collisionCenterY = collisionRect.top + collisionRect.height / 2;
+
+        let closestIndex = null;
+        let closestDistance = Infinity;
+
+        this.cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenterX = cardRect.left + cardRect.width / 2;
+            const cardCenterY = cardRect.top + cardRect.height / 2;
+
+            // Calculate distance from card center to collision point center
+            const dx = cardCenterX - collisionCenterX;
+            const dy = cardCenterY - collisionCenterY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        this.setActiveCard(closestIndex);
+    }
+
+    setActiveCard(index) {
+        this.activeIndex = index;
+
+        // Update card classes
+        this.cards.forEach((card, i) => {
+            if (i === index) {
+                card.classList.add('focused');
+            } else {
+                card.classList.remove('focused');
+            }
+        });
+
+        // Update description
+        if (index !== null) {
+            const card = this.cards[index];
+            const skillName = card.dataset.skill;
+            const skillDesc = card.dataset.description;
+
+            const nameEl = this.descriptionBox.querySelector('.skill-name');
+            const descEl = this.descriptionBox.querySelector('.skill-desc');
+
+            if (nameEl) nameEl.textContent = skillName;
+            if (descEl) descEl.textContent = skillDesc;
+
+            this.showDescription();
+
+            console.log('✨ Active skill:', skillName);
+        } else {
+            this.hideDescription();
+        }
+    }
+
+    updateCardRotations() {
+        const wheelRotation = gsap.getProperty(this.wheel, 'rotation');
+
+        // Keep ALL cards at 0 rotation - perfectly square and straight!
+        this.cards.forEach((card) => {
+            gsap.set(card, {
+                rotation: -wheelRotation // Counter-rotate to keep cards straight
+            });
+        });
+    }
+
+    showDescription() {
+        gsap.to(this.descriptionBox, {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: 'power2.out',
+            onStart: () => {
+                this.descriptionBox.classList.add('visible');
+            }
+        });
+    }
+
+    hideDescription() {
+        gsap.to(this.descriptionBox, {
+            opacity: 0,
+            y: 20,
+            duration: 0.4,
+            ease: 'power2.in',
+            onComplete: () => {
+                this.descriptionBox.classList.remove('visible');
+            }
+        });
+    }
+}
+
+// ===================================
 // Initialize Everything
 // ===================================
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all components
-    new CustomCursor();
     new ProgressBar();
     new Menu();
     new ThemeToggle();
     new Soundbar();
     new TypedText();
     new Accordion();
+    new SkillsWheel();
     new ScrollAnimations();
     new ContactForm();
     new SmoothScroll();

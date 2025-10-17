@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start index.html)",
+      "Bash(start \"\" \"C:\\Users\\ADMIN\\Desktop\\Personal-Web-Portfolio-main - Copy\\devfolio-portfolio\\index.html\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

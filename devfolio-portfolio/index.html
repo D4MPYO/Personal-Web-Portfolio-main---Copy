@@ -19,10 +19,6 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
     <!-- Progress Bar -->
     <div class="progress-bar"></div>
 
@@ -319,70 +315,82 @@
     <section class="skills section" id="skills">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Skills</h2>
-                <p class="section-subtitle">Technologies I work with</p>
+                <h2 class="section-title">My Skills</h2>
             </div>
 
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <img src="../Image/SVG/html5.svg" alt="HTML5">
-                    <span>HTML5</span>
+            <div class="skills-wheel-wrapper">
+                <!-- Drag Me Indicator -->
+                <div class="drag-me-indicator">
+                    drag me →
                 </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/css3.svg" alt="CSS3">
-                    <span>CSS3</span>
+
+                <!-- Semi-Circular Wheel Container -->
+                <div class="skills-wheel-container">
+                    <!-- Collision detection point (invisible) -->
+                    <div class="collision-point" id="collisionPoint"></div>
+
+                    <!-- Rotating Wheel -->
+                    <div class="skills-wheel" id="skillsWheel">
+                        <!-- Hidden SVG Path for circular positioning -->
+                        <svg viewBox="0 0 800 800" class="skills-path-svg">
+                            <path id="circularPath" d="M 400,50 A 350,350 0 1,1 399.9,50" fill="none"/>
+                        </svg>
+
+                        <div class="skill-card" data-skill="HTML5" data-description="Building structured and semantic web pages with modern HTML5">
+                            <img src="../Image/SVG/html5.svg" alt="HTML5">
+                        </div>
+                        <div class="skill-card" data-skill="CSS3" data-description="Creating beautiful, responsive designs with modern CSS3 and animations">
+                            <img src="../Image/SVG/css3.svg" alt="CSS3">
+                        </div>
+                        <div class="skill-card" data-skill="JavaScript" data-description="Building interactive web applications with vanilla JavaScript and ES6+">
+                            <img src="../Image/SVG/JavaScript.svg" alt="JavaScript">
+                        </div>
+                        <div class="skill-card" data-skill="Java" data-description="Developing robust applications and Android apps using Java">
+                            <img src="../Image/SVG/java.svg" alt="Java">
+                        </div>
+                        <div class="skill-card" data-skill="Android Development" data-description="Creating native Android applications with Java and Kotlin">
+                            <img src="../Image/SVG/android.svg" alt="Android">
+                        </div>
+                        <div class="skill-card" data-skill="Python" data-description="Writing clean code for automation, data analysis, and backend development">
+                            <img src="../Image/SVG/python.svg" alt="Python">
+                        </div>
+                        <div class="skill-card" data-skill="VS Code" data-description="My primary code editor for efficient development workflow">
+                            <img src="../Image/SVG/vscode.svg" alt="VS Code">
+                        </div>
+                        <div class="skill-card" data-skill="PHP" data-description="Server-side scripting for dynamic web applications and backends">
+                            <img src="../Image/SVG/php.svg" alt="PHP">
+                        </div>
+                        <div class="skill-card" data-skill="MySQL" data-description="Database design and management for data-driven applications">
+                            <img src="../Image/SVG/mysql-logo-svgrepo-com.svg" alt="MySQL">
+                        </div>
+                        <div class="skill-card" data-skill="Microsoft Office" data-description="Productivity tools for documentation, presentations, and data analysis">
+                            <img src="../Image/SVG/Microsoft-365.svg" alt="Office">
+                        </div>
+                        <div class="skill-card" data-skill="Canva" data-description="Creating graphics and visual content for projects and social media">
+                            <img src="../Image/SVG/canva.svg" alt="Canva">
+                        </div>
+                        <div class="skill-card" data-skill="CapCut" data-description="Video editing for content creation and project presentations">
+                            <img src="../Image/SVG/capcut.svg" alt="Capcut">
+                        </div>
+                        <div class="skill-card" data-skill="Git" data-description="Version control system for tracking changes and managing code repositories">
+                            <img src="../Image/SVG/git.svg" alt="Git">
+                        </div>
+                        <div class="skill-card" data-skill="GitHub" data-description="Version control and collaboration for all my development projects">
+                            <img src="../Image/SVG/github.svg" alt="GitHub">
+                        </div>
+                        <div class="skill-card" data-skill="Firebase" data-description="Backend services, authentication, and real-time database solutions">
+                            <img src="../Image/SVG/firebase.svg" alt="Firebase">
+                        </div>
+                        <div class="skill-card" data-skill="Figma" data-description="UI/UX design and prototyping for modern web and mobile interfaces">
+                            <img src="../Image/SVG/figma.svg" alt="Figma">
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/JavaScript.svg" alt="JavaScript">
-                    <span>JavaScript</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/java.svg" alt="Java">
-                    <span>Java</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/android.svg" alt="Android Studio">
-                    <span>Android Studio</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/python.svg" alt="Python">
-                    <span>Python</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/vscode.svg" alt="VS Code">
-                    <span>VS Code</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/php.svg" alt="PHP">
-                    <span>PHP</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/mysql-logo-svgrepo-com.svg" alt="MySQL">
-                    <span>MySQL</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/Microsoft-365.svg" alt="Microsoft Office">
-                    <span>Microsoft Office</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/canva.svg" alt="Canva">
-                    <span>Canva</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/capcut.svg" alt="Capcut">
-                    <span>Capcut</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/github.svg" alt="GitHub">
-                    <span>GitHub</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/firebase.svg" alt="Firebase">
-                    <span>Firebase</span>
-                </div>
-                <div class="skill-card">
-                    <img src="../Image/SVG/figma.svg" alt="Figma">
-                    <span>Figma</span>
+
+                <!-- Description Box (Hidden by default) -->
+                <div class="skill-description-box" id="skillDescription">
+                    <h3 class="skill-name">Skill Name</h3>
+                    <p class="skill-desc">Skill description will appear here when you drag the wheel.</p>
                 </div>
             </div>
         </div>
